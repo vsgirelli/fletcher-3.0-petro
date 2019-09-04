@@ -27,3 +27,8 @@ Pag: 238
 
 About the Blaise architecture specifically (Xeon E5 v4, Broadwell):
 https://www.intel.com/content/www/us/en/products/docs/processors/xeon/xeon-e5-e7-v4-uncore-performance-monitoring.html
+
+In
+https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-optimization-manual.pdf
+there are information about and method to characterize the application and
+identify the bottleneck sources. pag: 581
