@@ -1,0 +1,29 @@
+04/09/19
+
+The main objective is to find the bottlenecks assotiated to the
+microarchitecture. Details as load balancing, core paralellism are expected to
+be already covered in the previous phases of the project. However, details
+related to the architecture might need more atention.
+Therefore, using some performance analysis application, we must discover
+possible architectural bottlenecks suffered by the application.
+
+Reading about perf raw counters (Francis' suggestion):
+Most of the Intel counters can not be found in perf list, but knowing the raw
+value of the counter (specified in the architectural manual) we can access it.
+The counter's raw value is:
+rUUEE
+UU : umask
+EE : event number
+ex: perf stat -e cycles,r80a2,r2b1
+r80a2 has instrumented RESOURCE_STALLS.OTHER
+r2b1 has instrumented UOPS_DISPATCHED.CORE
+(omfg that's amazing! I didn't know we could get access to this kind of
+information)
+
+A description of the events can be found in
+Intel® 64 and IA-32 Architectures Software Developer’s Manual, Volume 3B
+https://www.intel.com/content/www/us/en/architecture-and-technology/64-ia-32-architectures-software-developer-vol-3b-part-2-manual.html
+Pag: 238
+
+About the Blaise architecture specifically (Xeon E5 v4, Broadwell):
+https://www.intel.com/content/www/us/en/products/docs/processors/xeon/xeon-e5-e7-v4-uncore-performance-monitoring.html
