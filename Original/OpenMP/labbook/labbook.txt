@@ -1,11 +1,11 @@
 04/09/19
 
-The main objective is to find the bottlenecks assotiated to the
+The main objective is to find the application's bottlenecks assotiated to the
 microarchitecture. Details as load balancing, core paralellism are expected to
 be already covered in the previous phases of the project. However, details
 related to the architecture might need more atention.
-Therefore, using some performance analysis application, we must discover
-possible architectural bottlenecks suffered by the application.
+Therefore, using some performance analysis tool, we must discover possible
+architectural bottlenecks suffered by the application.
 
 Reading about perf raw counters (Francis' suggestion):
 Most of the Intel counters can not be found in perf list, but knowing the raw
@@ -26,9 +26,76 @@ https://www.intel.com/content/www/us/en/architecture-and-technology/64-ia-32-arc
 Pag: 238
 
 About the Blaise architecture specifically (Xeon E5 v4, Broadwell):
+Information about specific hardware counters.
 https://www.intel.com/content/www/us/en/products/docs/processors/xeon/xeon-e5-e7-v4-uncore-performance-monitoring.html
 
 In
 https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-optimization-manual.pdf
 there are information about and method to characterize the application and
 identify the bottleneck sources. pag: 581
+
+
+05/09/19
+
+Stats would be good to know:
+Branch misprediction
+L1 store hit ratio
+L1 load hit ratio
+Main memory accesses
+Cycles
+Mean cycles each requisition waits on main memory queue
+Therefore, based on the Blaise architecture counters defined above, run the
+application with perf collecting the events.
+
+The performance monitoring facilities are organized into per-component
+performance monitorig units (pmon). 
+
+
+25/09/19
+
+Something about the PEBS (Processor Event Based Sampling)
+https://software.intel.com/en-us/vtune-amplifier-help-hardware-event-based-sampling-collection
+The event capturing is made in intervals. It's preciselly what the name means: a
+sample of the events that occurred in the interval. Thus, it's not a 100%
+accurate.
+
+
+26/09/19
+
+We identified some HW counters that might be useful from:
+https://www.intel.com/content/www/us/en/products/docs/processors/xeon/xeon-e5-e7-v4-uncore-performance-monitoring.html
+page 25
+
+Here I'm gonna list the event name, umask, event number and a brief description
+of the events I consider to be relevant, separated for unit (cache counters,
+uncore counters, etc).
+
+Basically, the set of registers available to monitoring has specific bit
+configuration for each event. When defining the events we want to be tracked,
+the performance monitoring tool basically can set these bits to the values
+informed in the Intel reference manual.
+The values detailed below are in hexadecimal. The umask value is translated from
+binary.
+
+2.1.5 Uncore counters: a set of registers that keep track of the uncore state,
+for global control and box-level information.
+Events:
+phold_cycles: read https://en.wikipedia.org/wiki/Wait_state
+If the reason between phold_cycles and execution cycles is too high, the
+application can be wasting too much time on memory accesses.
+umask  event
+08      45
+
+
+
+
+
+
+I also want to write a simple description of some of the acronyms present in the
+file:
+pmon: performance monitor.
+ubox: serves as the system onfiguration controller. Central unit for: master for
+reading and writing the physically distributed registers using the message
+channel; intermediary for interruptions (traffic, dispatching interruptions to
+the correct core, etc); system lock master (QPI bus lock).
+
