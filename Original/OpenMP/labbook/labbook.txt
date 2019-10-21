@@ -48,7 +48,7 @@ Therefore, based on the Blaise architecture counters defined above, run the
 application with perf collecting the events.
 
 The performance monitoring facilities are organized into per-component
-performance monitorig units (pmon). 
+performance monitorig units (pmon).
 
 
 25/09/19
@@ -80,22 +80,27 @@ binary.
 2.1.5 Uncore counters: a set of registers that keep track of the uncore state,
 for global control and box-level information.
 Events:
-phold_cycles: read https://en.wikipedia.org/wiki/Wait_state
+- phold_cycles: read https://en.wikipedia.org/wiki/Wait_state
 If the reason between phold_cycles and execution cycles is too high, the
 application can be wasting too much time on memory accesses.
 umask  event
 08      45
 
-
+- 
 
 
 
 
 I also want to write a simple description of some of the acronyms present in the
 file:
-pmon: performance monitor.
-ubox: serves as the system onfiguration controller. Central unit for: master for
+- pmon: performance monitor.
+- ubox: serves as the system onfiguration controller. Central unit for: master for
 reading and writing the physically distributed registers using the message
 channel; intermediary for interruptions (traffic, dispatching interruptions to
 the correct core, etc); system lock master (QPI bus lock).
-
+- CBo: cbo manages the interference between the core and the llc. Responsible
+  for managing data delivery from the llc to the requesting core, as well as
+mantaining cache coherence among the cores that share a llc. For that purpose,
+the cbo generates and collect snoops when the MESIF protocol requires. The cbo
+is basically the gate keeper for the entire Intel QuickPath Interconnect, making
+sure all the QPI messages remain coherent.
