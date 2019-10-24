@@ -85,8 +85,13 @@ If the reason between phold_cycles and execution cycles is too high, the
 application can be wasting too much time on memory accesses.
 umask  event
 08      45
-A first exec returned zero phold cycles, so I don't believe it represents what
-we thought.
+A first execution resutled in zero phold_cycles. Talking to Francis he explained
+what exactly generates a phold_cycle. It's necessary that the entire pipeline
+stops. For that, all buffers must be entirely filled: the ROB can't have any
+other space to allocate instructions being dispatched out of order. Therefore,
+any other buffer will get full, stopping all stages. So it might happen that
+this jsut does not happen for this application. One example that could generate
+phold_cycles is the MCF from the SPEC CPU 2006.
 
 - 
 
