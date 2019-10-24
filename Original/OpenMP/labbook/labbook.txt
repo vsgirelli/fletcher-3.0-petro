@@ -85,6 +85,8 @@ If the reason between phold_cycles and execution cycles is too high, the
 application can be wasting too much time on memory accesses.
 umask  event
 08      45
+A first exec returned zero phold cycles, so I don't believe it represents what
+we thought.
 
 - 
 
@@ -103,4 +105,14 @@ the correct core, etc); system lock master (QPI bus lock).
 mantaining cache coherence among the cores that share a llc. For that purpose,
 the cbo generates and collect snoops when the MESIF protocol requires. The cbo
 is basically the gate keeper for the entire Intel QuickPath Interconnect, making
-sure all the QPI messages remain coherent.
+sure all the QPI messages remain coherent. Cbo events include events internal to
+the llc: llc access rates, llc hit/miss rates, llc eviction and fill rates, and
+to detect evidence of back pressure on the llc pipelines. Also it tracks the
+MESI state transitions that occurr as result of data sharing across sockets.
+Ultimately, there is a thread field in the cbo register that can be applied so
+the events are recorded per thread/core. To get an aggregated count for the
+entire llc, the cbos must be added together. Individual cbos deviations can be
+used to identify possible hot spots.
+
+Question:
+- What does it mean "evidente of back pressure on the llc pipelines?"
