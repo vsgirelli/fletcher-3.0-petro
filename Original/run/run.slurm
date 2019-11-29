@@ -10,7 +10,7 @@ printf "\t Running on $SLURM_JOB_NODELIST \n\n"
 date
 hostnamectl
 
-source /home/intel/bin/compilervars.sh intel64
+#source /home/intel/bin/compilervars.sh intel64
 
 app=$1
 METRIC=$2

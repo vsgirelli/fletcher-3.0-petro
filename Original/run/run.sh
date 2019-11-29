@@ -9,11 +9,9 @@ set -o errexit -o nounset -o pipefail -o posix
 
 metrics=(cycles branches branch-misses dtlb_load_misses.demand_ld_walk_completed dtlb_load_misses.large_page_walk_completed)
 
-threads=8
 
-for (( len=120; len<=504; len+=32 )) ; do
+#for (( len=120; len<=504; len+=32 )) ; do
 #  if [[ $len == 120 ]] ; then
-    t=0.02
 #  elif [[ $len == 152 ]] ; then
 #    t=0.7
 #  elif [[ $len == 184 ]] ; then
@@ -39,6 +37,9 @@ for (( len=120; len<=504; len+=32 )) ; do
 #  elif [[ $len == 504 ]] ; then
 #    t=0.020
 #  fi
+threads=8
+len=504
+t=0.02
 
   #for app  in Der1Der1HM Der1Der1LM Der1Der1Orig Original; do
   for app  in Original; do
@@ -46,4 +47,3 @@ for (( len=120; len<=504; len+=32 )) ; do
       sbatch -J "$app.$len.$METRIC" run.slurm $app $METRIC $threads $len $t
     done
   done
-done
