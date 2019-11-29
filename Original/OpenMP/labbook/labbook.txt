@@ -93,7 +93,9 @@ any other buffer will get full, stopping all stages. So it might happen that
 this jsut does not happen for this application. One example that could generate
 phold_cycles is the MCF from the SPEC CPU 2006.
 
-- 
+- L1 hit ratio: L1-dcache-loads and L1-dcache-load-misses
+- L2 hit ratio: L1-dcache-stores and for the L1-store misses:
+  l2_rqsts.all_demand_miss
 
 
 
@@ -121,3 +123,14 @@ used to identify possible hot spots.
 
 Question:
 - What does it mean "evidente of back pressure on the llc pipelines?"
+
+
+25/10/19
+
+Siglas:
+RTM: restricted transational memory
+PEBS: precise evend based sampling
+
+
+Torvalds' github with pmu events for many intel archs:
+https://github.com/torvalds/linux/tree/master/tools/perf/pmu-events/arch/x86

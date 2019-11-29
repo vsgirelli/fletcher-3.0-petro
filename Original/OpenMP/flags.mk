@@ -1,4 +1,4 @@
 # modificações pra usar o ICC
-CC=$(ICC)
-CFLAGS=-qopenmp
+CC=$(GCC)
+CFLAGS=-fopenmp
 LIBS=$(ICC_LIBS)

@@ -1,3 +1,3 @@
-CC=$(PGCC)
-CFLAGS=-O3 -mp
+CC=$(GCC)
+CFLAGS=-O3 -fopenmp
 LIBS=$(GCC_LIBS)

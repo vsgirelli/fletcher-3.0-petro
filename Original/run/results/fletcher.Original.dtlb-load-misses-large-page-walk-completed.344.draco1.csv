@@ -1,0 +1,11 @@
+app,len,t,metric,value
+Original,344,0.02,dtlb-load-misses-large-page-walk-completed,10681254
+Original,344,0.02,dtlb-load-misses-large-page-walk-completed,11042831
+Original,344,0.02,dtlb-load-misses-large-page-walk-completed,10618857
+Original,344,0.02,dtlb-load-misses-large-page-walk-completed,10728021
+Original,344,0.02,dtlb-load-misses-large-page-walk-completed,10610677
+Original,344,0.02,dtlb-load-misses-large-page-walk-completed,10911499
+Original,344,0.02,dtlb-load-misses-large-page-walk-completed,10753231
+Original,344,0.02,dtlb-load-misses-large-page-walk-completed,10609069
+Original,344,0.02,dtlb-load-misses-large-page-walk-completed,10670141
+Original,344,0.02,dtlb-load-misses-large-page-walk-completed,10644433
